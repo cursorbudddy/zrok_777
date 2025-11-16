@@ -160,16 +160,31 @@ fun ChatListItem(
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Top
             ) {
-                Text(
-                    text = chat.displayName,
-                    style = MaterialTheme.typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                Column(
                     modifier = Modifier.weight(1f)
-                )
+                ) {
+                    Text(
+                        text = chat.displayName,
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    // WhatsApp number
+                    if (chat.whatsappNumber != null) {
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(
+                            text = "WhatsApp: ${chat.whatsappNumber}",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color(0xFF128C7E),
+                            fontWeight = FontWeight.Medium
+                        )
+                    }
+                }
 
                 chat.lastMessageTime?.let { timestamp ->
                     Text(
@@ -183,7 +198,7 @@ fun ChatListItem(
                 }
             }
 
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(6.dp))
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
